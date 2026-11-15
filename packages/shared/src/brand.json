@@ -1,0 +1,7 @@
+{
+  "name": "Nova",
+  "slug": "nova",
+  "scheme": "nova",
+  "iosBundleId": "com.novagym.app",
+  "androidPackage": "com.novagym.app"
+}

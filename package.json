@@ -1,0 +1,25 @@
+{
+  "name": "nova-prototype",
+  "private": true,
+  "workspaces": [
+    "apps/mobile",
+    "packages/shared"
+  ],
+  "scripts": {
+    "start": "npm run start -w @gymapp/mobile --",
+    "start:prototype": "npm run start:prototype -w @gymapp/mobile",
+    "build:web": "npm run build:web -w @gymapp/mobile",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "overrides": {
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native-worklets": "0.10.1",
+    "react-native-reanimated": "4.5.1",
+    "react-native-gesture-handler": "~2.32.0"
+  }
+}
