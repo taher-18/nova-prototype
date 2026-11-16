@@ -136,6 +136,7 @@ export default function ProfileScreen() {
 
       <AppText variant="caption" color={colors.muted} center>
         {t('profile.version', { version: APP_VERSION })}
+        {PROTOTYPE && process.env.EXPO_PUBLIC_BUILD_TIME ? ` · ${process.env.EXPO_PUBLIC_BUILD_TIME}` : ''}
       </AppText>
     </Screen>
   );
