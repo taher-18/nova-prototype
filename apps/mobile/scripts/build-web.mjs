@@ -20,6 +20,14 @@ execSync(`npx expo export --platform web --output-dir dist-web --clear`, {
   env: { ...process.env, EXPO_PUBLIC_PROTOTYPE: '1', NODE_ENV: 'production' },
 });
 
+// Save the tester ID (?t=T1) the moment the page loads, before the app's
+// JavaScript downloads or the router rewrites the address. Same key and rule
+// as src/prototype/testerId.ts. Also runs from 404.html, which GitHub Pages
+// serves at the original address, query string included.
+const captureTester =
+  '<script>try{var t=new URLSearchParams(location.search).get("t");' +
+  't=t&&t.trim();if(t&&/^[\\w-]{1,40}$/.test(t))localStorage.setItem("nova_tester_id",t)}catch(e){}</script>';
+
 // Home-screen app tags (Add to Home Screen) and a phone-friendly viewport.
 const base = '/nova-prototype';
 const head = [
@@ -32,6 +40,7 @@ const head = [
 ].join('\n    ');
 let html = readFileSync(join(out, 'index.html'), 'utf8');
 html = html
+  .replace(/<head>/, `<head>\n    ${captureTester}`)
   .replace(/<meta name="viewport"[^>]*>/, '<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">')
   .replace(/<title>[^<]*<\/title>/, '<title>Nova</title>')
   .replace('</head>', `    ${head}\n  </head>`);
